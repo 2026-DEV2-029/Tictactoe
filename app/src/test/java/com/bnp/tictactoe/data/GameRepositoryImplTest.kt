@@ -2,6 +2,7 @@ package com.bnp.tictactoe.data
 
 import com.bnp.tictactoe.domain.model.Player
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertTrue
 import org.junit.Before
@@ -84,6 +85,16 @@ class GameRepositoryImplTest {
 
         assertTrue(finalState.isDraw)
         assertNull(finalState.winner)
+    }
+
+    @Test
+    fun `reset game to reset board for new game`() {
+        classToTest.makeMove(0)
+        val resetState = classToTest.resetGame()
+
+        assertTrue(resetState.board.all { it == null })
+        assertNull(resetState.winner)
+        assertFalse(resetState.isDraw)
     }
 
 }
