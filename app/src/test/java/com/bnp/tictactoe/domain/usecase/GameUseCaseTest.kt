@@ -1,11 +1,13 @@
 package com.bnp.tictactoe.domain.usecase
 
+import com.bnp.tictactoe.domain.model.GameState
 import com.bnp.tictactoe.domain.model.Player
 import com.bnp.tictactoe.domain.repository.GameRepository
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
@@ -38,6 +40,12 @@ class GameUseCaseTest {
 
     @Test
     fun `first move should place X at selected position`() {
+        val gameState = GameState(
+            board = listOf(Player.X, null, null, null, null, null, null, null, null),
+            currentPlayer = Player.O,
+            winner = null
+        )
+        whenever(fakeGameRepository.makeMove(0)).thenReturn(gameState)
         val state = classToTest.makeMove(0)
 
         assertEquals(Player.X, state.board[0])

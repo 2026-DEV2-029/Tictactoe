@@ -11,10 +11,10 @@ import javax.inject.Inject
  */
 class GameUseCase @Inject constructor(private val gameRepository: GameRepository) {
     fun makeMove(position: Int): GameState {
-        return GameState()
+        return gameRepository.makeMove(position)
     }
 
     fun resetGame(): GameState {
-        return GameState()
+        return gameRepository.resetGame()
     }
 }
