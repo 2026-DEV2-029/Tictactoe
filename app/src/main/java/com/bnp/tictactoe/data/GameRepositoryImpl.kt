@@ -1,5 +1,6 @@
 package com.bnp.tictactoe.data
 
+import com.bnp.tictactoe.domain.model.GameState
 import com.bnp.tictactoe.domain.repository.GameRepository
 
 
@@ -8,5 +9,13 @@ import com.bnp.tictactoe.domain.repository.GameRepository
  * @DateCreated: Monday, February 02, 2026
  */
 class GameRepositoryImpl: GameRepository {
-    //todo
+
+    override fun makeMove(position: Int): GameState {
+        TODO("Not yet implemented")
+    }
+
+    override fun resetGame(): GameState {
+        TODO("Not yet implemented")
+    }
+
 }
