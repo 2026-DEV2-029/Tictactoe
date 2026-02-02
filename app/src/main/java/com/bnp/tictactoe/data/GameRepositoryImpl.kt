@@ -26,10 +26,12 @@ class GameRepositoryImpl : GameRepository {
 
     private fun updateState(newBoard: List<Player?>): GameState {
         val (winner, winningLine) = checkWinner(newBoard)
+        val isDraw = winner == null && newBoard.all { it != null }
         state = state.copy(
                 board = newBoard,
                 currentPlayer = if (state.currentPlayer == Player.X) Player.O else Player.X,
                 winner = winner,
+                isDraw = isDraw,
                 winningLine = winningLine
         )
         return state
