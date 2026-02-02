@@ -13,6 +13,9 @@ class GameRepositoryImpl : GameRepository {
 
     private var state = GameState()
     override fun makeMove(position: Int): GameState {
+        if (state.board[position] != null) {
+            return state
+        }
         val newBoard = state.board.toMutableList()
             .also {
                 it[position] = state.currentPlayer
