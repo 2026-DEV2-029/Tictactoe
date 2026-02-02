@@ -54,7 +54,8 @@ class GameRepositoryImpl : GameRepository {
     }
 
     override fun resetGame(): GameState {
-        TODO("Not yet implemented")
+        state = GameState()
+        return state
     }
 
 }
