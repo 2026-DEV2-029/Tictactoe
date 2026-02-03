@@ -13,5 +13,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameViewModel @Inject constructor(private val gameUseCase: GameUseCase) : ViewModel() {
-    //todo
+
+    fun onCellClicked(index: Int) {
+        //TODO: Implement this method
+
+    }
+
+    fun onResetClicked() {
+        //TODO: Implement this method
+    }
 }
