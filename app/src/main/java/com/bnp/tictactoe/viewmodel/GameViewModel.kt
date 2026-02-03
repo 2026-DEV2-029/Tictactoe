@@ -30,6 +30,8 @@ class GameViewModel @Inject constructor(private val gameUseCase: GameUseCase) : 
     }
 
     fun onResetClicked() {
-        //TODO: Implement this method
+        viewModelScope.launch {
+            _gameState.value = gameUseCase.resetGame()
+        }
     }
 }

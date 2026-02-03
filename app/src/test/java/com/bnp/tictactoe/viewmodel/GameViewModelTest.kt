@@ -56,13 +56,27 @@ class GameViewModelTest {
         //makeMove is called
         verify(fakeGameUseCase).makeMove(0)
         //position is updated on the board
-        assertEquals(newGameState, classToTest.gameState.value)
+        assertEquals(
+                newGameState,
+                classToTest.gameState.value
+        )
     }
 
     @Test
     fun `onResetClicked calls resetGame`() {
+        val initialGameState = GameState()
+        whenever(fakeGameUseCase.resetGame()).thenReturn(initialGameState)
+
         classToTest.onResetClicked()
+        testDispatcher.scheduler.advanceUntilIdle()
+
+        //resetGame is called
         verify(fakeGameUseCase).resetGame()
+        //game state is reset
+        assertEquals(
+                initialGameState,
+                classToTest.gameState.value
+        )
     }
 
 }
