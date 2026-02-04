@@ -35,10 +35,17 @@ import com.bnp.tictactoe.R
 import com.bnp.tictactoe.domain.model.GameState
 import com.bnp.tictactoe.domain.model.Player
 
-
 /**
  * @Author: 2026-DEV2-029;
  * @DateCreated: Tuesday, February 03, 2026
+ * */
+
+/**
+ * The main composable for the game screen.
+ *
+ * @param state The current state of the game.
+ * @param onCellClick A callback that is invoked when a cell is clicked.
+ * @param onResetClick A callback that is invoked when the reset button is clicked.
  */
 @Composable
 fun GameContent(
@@ -87,6 +94,11 @@ fun GameContent(
     }
 }
 
+/**
+ * A composable that displays the current status of the game.
+ *
+ * @param message The message to be displayed.
+ */
 @Composable
 private fun GameStatus(message: String) {
     Text(
@@ -95,6 +107,14 @@ private fun GameStatus(message: String) {
     )
 }
 
+/**
+ * A composable that displays the game board.
+ *
+ * @param board The current state of the board.
+ * @param enabled Whether the board is enabled for interaction.
+ * @param winningLine The line that represents the winning combination, if any.
+ * @param onCellClick A callback that is invoked when a cell is clicked.
+ */
 @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
 @Composable
 fun GameBoard(
@@ -123,6 +143,13 @@ fun GameBoard(
     }
 }
 
+/**
+ * A composable that displays a single cell on the game board.
+ *
+ * @param value The player who has marked the cell, or null if it is empty.
+ * @param enabled Whether the cell is enabled for interaction.
+ * @param onClick A callback that is invoked when the cell is clicked.
+ */
 @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
 @Composable
 fun GameCell(
@@ -150,6 +177,11 @@ fun GameCell(
     }
 }
 
+/**
+ * A composable that draws a line to indicate the winning combination.
+ *
+ * @param winningLine The line that represents the winning combination.
+ */
 @Composable
 private fun WinningLine(winningLine: List<Int>) {
     Canvas(modifier = Modifier.fillMaxSize()) {
@@ -172,6 +204,13 @@ private fun WinningLine(winningLine: List<Int>) {
     }
 }
 
+/**
+ * A helper function that creates the grid for the game board.
+ *
+ * @param board The current state of the board.
+ * @param enabled Whether the board is enabled for interaction.
+ * @param onCellClick A callback that is invoked when a cell is clicked.
+ */
 private fun LazyGridScope.createGrid(
         board: List<Player?>,
         enabled: Boolean,
@@ -188,6 +227,13 @@ private fun LazyGridScope.createGrid(
     }
 }
 
+/**
+ * A helper function that calculates the center of a cell on the game board.
+ *
+ * @param index The index of the cell.
+ * @param size The size of the game board.
+ * @return The offset of the center of the cell.
+ */
 private fun getCellCenter(
         index: Int,
         size: Size

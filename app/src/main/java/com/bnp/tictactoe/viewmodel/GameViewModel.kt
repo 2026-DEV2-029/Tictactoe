@@ -11,17 +11,27 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 /**
  * @Author: 2026-DEV2-029;
- * @DateCreated: Monday, February 02, 2026
- */
+ * @DateCreated: Tuesday, February 02, 2026
+ * */
 
+/**
+ * The ViewModel for the game screen.
+ *
+ * @property gameUseCase The use case that handles the business logic of the game.
+ */
 @HiltViewModel
 class GameViewModel @Inject constructor(private val gameUseCase: GameUseCase) : ViewModel() {
 
     private val _gameState = MutableStateFlow(GameState())
     val gameState: StateFlow<GameState> = _gameState.asStateFlow()
+
+    /**
+     * Called when a cell is clicked.
+     *
+     * @param index The index of the clicked cell.
+     */
     fun onCellClicked(index: Int) {
         viewModelScope.launch {
             _gameState.value = gameUseCase.makeMove(index)
@@ -29,6 +39,9 @@ class GameViewModel @Inject constructor(private val gameUseCase: GameUseCase) : 
 
     }
 
+    /**
+     * Called when the reset button is clicked.
+     */
     fun onResetClicked() {
         viewModelScope.launch {
             _gameState.value = gameUseCase.resetGame()
