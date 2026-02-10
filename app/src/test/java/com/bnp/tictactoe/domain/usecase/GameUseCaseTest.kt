@@ -30,6 +30,7 @@ class GameUseCaseTest {
 
     @Test
     fun `makeMove from GameRepository is called`() {
+        whenever(fakeGameRepository.makeMove(0)).thenReturn(GameState())
         classToTest.makeMove(0)
         verify(mock = fakeGameRepository).makeMove(0)
     }

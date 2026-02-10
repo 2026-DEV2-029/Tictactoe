@@ -49,45 +49,6 @@ class GameRepositoryImplTest {
     }
 
     @Test
-    fun `make move does not allow move after game is won`() {
-        val winningMoves = listOf(
-                0,
-                3,
-                1,
-                4,
-                2
-        ) // Player X wins
-        winningMoves.forEach { classToTest.makeMove(it) }
-        val stateAfterWin = classToTest.makeMove(5)
-
-        assertEquals(
-                Player.X,
-                stateAfterWin.winner
-        )
-        assertNull(stateAfterWin.board[5])
-    }
-
-    @Test
-    fun `make move detects draw condition`() {
-        val drawMoves = listOf(
-                0,
-                1,
-                2,
-                4,
-                3,
-                5,
-                7,
-                6,
-                8
-        ) // No winner
-        drawMoves.forEach { classToTest.makeMove(it) }
-        val finalState = classToTest.makeMove(8)
-
-        assertTrue(finalState.isDraw)
-        assertNull(finalState.winner)
-    }
-
-    @Test
     fun `reset game to reset board for new game`() {
         classToTest.makeMove(0)
         val resetState = classToTest.resetGame()

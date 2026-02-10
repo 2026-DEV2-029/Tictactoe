@@ -26,8 +26,11 @@ class GameRepositoryImpl : GameRepository {
             .also {
                 it[position] = state.currentPlayer
             }
-
-        return updateState(newBoard)
+        state = state.copy(
+            board = newBoard,
+            currentPlayer = if (state.currentPlayer == Player.X) Player.O else Player.X
+        )
+        return state
     }
 
     /**
@@ -39,47 +42,5 @@ class GameRepositoryImpl : GameRepository {
         state = GameState()
         return state
     }
-
-    /**
-     * Updates the game state after a move has been made.
-     *
-     * @param newBoard The new state of the board after the move.
-     * @return The updated game state.
-     */
-    private fun updateState(newBoard: List<Player?>): GameState {
-        val (winner, winningLine) = checkWinner(newBoard)
-        val isDraw = winner == null && newBoard.all { it != null }
-        state = state.copy(
-                board = newBoard,
-                currentPlayer = if (state.currentPlayer == Player.X) Player.O else Player.X,
-                winner = winner,
-                isDraw = isDraw,
-                winningLine = winningLine
-        )
-        return state
-    }
-
-    /**
-     * Checks for a winner on the board.
-     *
-     * @param board The current state of the board.
-     * @return A pair containing the winner and the winning line, if any.
-     */
-    private fun checkWinner(board: List<Player?>): Pair<Player?, List<Int>?> {
-        val winningPositions = listOf(
-                listOf(0, 1, 2), listOf(3, 4, 5), listOf(6, 7, 8), //horizontal
-                listOf(0, 3, 6), listOf(1, 4, 7), listOf(2, 5, 8),  //Vertical
-                listOf(0, 4, 8), listOf(2, 4, 6) //Diagonal
-        )
-        return winningPositions.firstNotNullOfOrNull { positions ->
-            val (a, b, c) = positions
-            if (board[a] != null && board[a] == board[b] && board[a] == board[c]) {
-                Pair(board[a], positions)
-            } else {
-                null
-            }
-        } ?: Pair(null, null)
-    }
-
 
 }
